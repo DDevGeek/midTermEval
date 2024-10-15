@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -62,122 +61,204 @@ class Person {
 }
 
 interface SchoolPeople {
-    void printJobDescription(Person person);
+    void printJobDescription();
     void printPeople();
     void addPerson(Person person);
     void removePerson(Person person);
-    void executeJob();
+    void executeJob(Person person);
 }
 
 abstract class SchoolWorker implements SchoolPeople {
     private String salary;
+    private String role;
 
     @Override
-    public void printJobDescription(Person person) {
+    public void printJobDescription() {
         System.out.println("persons");
     }
 
     @Override
     public void printPeople() {
-        System.out.println("printing people");
+        System.out.println("List");
     }
 
     @Override
     public void addPerson(Person person) {
-        System.out.println("adding persons");
+        System.out.println("add");
     }
 
     @Override
     public void removePerson(Person person) {
-        System.out.println("removing person");
+        System.out.println("remove");
+    }
+}
+
+class SchoolTeachers extends SchoolWorker {
+    private final List<Person> schoolTeacherList = new ArrayList<>();
+
+    @Override
+    public void printPeople() {
+        System.out.println("========= SCHOOL TEACHERS 🧑‍🏫========");
+        System.out.println();
+        for (Person teacher : schoolTeacherList) {
+            System.out.println("Name: " + teacher.getName());
+            System.out.println("Age: " + teacher.getAge());
+            System.out.println("Phone number: " + teacher.getPhoneNumber());
+            System.out.println("Location: " + teacher.getNationality());
+            System.out.println("Email: " + teacher.getEmailAddress());
+            System.out.println("=======");
+            System.out.println();
+        }
     }
 
     @Override
-    public void executeJob() {
-        System.out.println("executing job");
+    public void addPerson(Person person) {
+        schoolTeacherList.add(person);
+    }
+
+    @Override
+    public void removePerson (Person person) {
+        for (Person teacher : schoolTeacherList) {
+            if (teacher.getName().equals(person.getName())) {
+                schoolTeacherList.remove(person);
+                System.out.println(person.getName() + " was removed successfully 😃");
+            }else {
+                System.out.println(person.getName() + " does not exist in the database ⚠️");
+            }
+        }
+    }
+
+    @Override
+    public void printJobDescription() {
+        System.out.println("School teacher teaches students at school");
+    }
+
+    @Override
+    public void executeJob(Person person) {
+        System.out.println(person.getName() + " is teaching students in class 👨‍🏫");
     }
 }
 
-
-
-class SchoolTeachers extends SchoolWorker {
-
-}
-
 abstract class SchoolStudent implements SchoolPeople {
-    List<Person> studentList = new ArrayList<>();
+    private final List<Person> studentList = new ArrayList<>();
 
     @Override
     public void addPerson(Person person) {
         studentList.add(person);
-        System.out.println(person.getName() + " Was Added successfully");
     }
 
     @Override
     public void removePerson(Person person) {
-        for (Person person1 : studentList) {
-            if (person1.getName().equals(person1.getName())) {
+        for (Person student : studentList) {
+            if (student.getName().equals(person.getName())) {
                 studentList.remove(person);
-                System.out.println(person.getName() + " was removed successfully");
+                System.out.println(person.getName() + " was removed successfully 😃");
             }else {
-                System.out.println(person.getName() + " does not exist in the database");
+                System.out.println(person.getName() + " does not exist in the database ⚠️");
             }
         }
     }
 
     @Override
     public void printPeople() {
-        System.out.println("========= STUDENTS ========");
+        System.out.println("========= STUDENTS 👩‍🎓 ========");
         System.out.println();
         for (Person student : studentList) {
-            System.out.println("Name" + student.getName());
-            System.out.println("Age" + student.getAge());
-            System.out.println("Phone number" + student.getPhoneNumber());
-            System.out.println("Location" + student.getNationality());
-            System.out.println("Email" + student.getEmailAddress());
+            System.out.println("Name: " + student.getName());
+            System.out.println("Age: " + student.getAge());
+            System.out.println("Phone number: " + student.getPhoneNumber());
+            System.out.println("Location: " + student.getNationality());
+            System.out.println("Email: " + student.getEmailAddress());
+            System.out.println("=======");
+            System.out.println();
         }
     }
 }
 
 
-
 class FirstGradeStudents extends SchoolStudent {
-
-    @Override
-    public void printJobDescription(Person person) {
-        System.out.println("persons");
-    }
-
-    @Override
-    public void printPeople() {
-        System.out.println("printing people");
-    }
+    private final String role = "Student";
 
     @Override
     public void addPerson(Person person) {
-        System.out.println("adding persons");
+        super.addPerson(person);
     }
 
     @Override
     public void removePerson(Person person) {
-        System.out.println("removing person");
+        super.removePerson(person);
     }
 
     @Override
-    public void executeJob() {
-        System.out.println("executing job");
+    public void printPeople() {
+        super.printPeople();
     }
+
+    @Override
+    public void executeJob(Person person) {
+        System.out.println(person.getName() + " is " + " Studying in class 👨‍🎓");
+    }
+
+    @Override
+    public void printJobDescription() {
+        System.out.println("Study 24/7");
+    }
+
 }
 
 class SchoolCleaners extends SchoolWorker {
+    private final String role = "School cleanser";
 
+    private final List<Person> schoolCleanersList = new ArrayList<>();
+
+    @Override
+    public void printPeople() {
+        System.out.println("========= SCHOOL CLEANERS 🧹 ========");
+        System.out.println();
+        for (Person cleaner : schoolCleanersList) {
+            System.out.println("Name: " + cleaner.getName());
+            System.out.println("Age: " + cleaner.getAge());
+            System.out.println("Phone number: " + cleaner.getPhoneNumber());
+            System.out.println("Location: " + cleaner.getNationality());
+            System.out.println("Email: " + cleaner.getEmailAddress());
+            System.out.println("=======");
+            System.out.println();
+        }
+    }
+
+    @Override
+    public void addPerson(Person person) {
+        schoolCleanersList.add(person);
+    }
+
+    @Override
+    public void removePerson(Person person) {
+        for (Person worker : schoolCleanersList) {
+            if (worker.getName().equals(person.getName())) {
+                schoolCleanersList.remove(person);
+                System.out.println(person.getName() + " was removed successfully 😃");
+            }else {
+                System.out.println(person.getName() + " does not exist in the database ⚠️");
+            }
+        }
+    }
+
+    @Override
+    public void printJobDescription() {
+        System.out.println(this.role + " cleans the school");
+    }
+
+    @Override
+    public void executeJob(Person person) {
+        System.out.println(person.getName() + " is cleaning 🧹");
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
         FirstGradeStudents student = new FirstGradeStudents();
-        SchoolWorker cleaners = new SchoolCleaners();
-        SchoolWorker schoolWorker  = new SchoolTeachers();
+        SchoolCleaners cleaners = new SchoolCleaners();
+        SchoolTeachers schoolWorker  = new SchoolTeachers();
 
         Person student1 = new Person("jack", "23", "ugandan", "0998787", "jack@j.com");
         Person student2 = new Person("julie", "24", "congo", "0998787", "julie@gmail.com");
@@ -185,13 +266,36 @@ public class Main {
         Person teacher2 = new Person("blues", "45", "uganda", "0998787", "blues@gmail.com");
         Person cleaner1 = new Person("jackson", "49", "uganda", "008788", "jackson@gmail.com");
         Person cleaner2 = new Person("jess", "76", "uganda", "998899", "jess@gmail.com");
+        Person johnDoe = new Person("john Doe", "87", "unknown", "998899100-111", "johndoe@gmail.com");
+
         student.addPerson(student1);
         student.addPerson(student2);
+        student.printPeople();
+        student.executeJob(student1);
+        student.removePerson(student1);
+
+        // trying to remove a un registered person
+        student.removePerson(johnDoe);
+        System.out.println();
+
         schoolWorker.addPerson(teacher1);
         schoolWorker.addPerson(teacher2);
+        schoolWorker.printPeople();
+        schoolWorker.executeJob(teacher1);
+        schoolWorker.removePerson(teacher1);
+
+        // trying to remove a un registered person
+        schoolWorker.removePerson(johnDoe);
+        System.out.println();
+
         cleaners.addPerson(cleaner1);
         cleaners.addPerson(cleaner2);
+        cleaners.printPeople();
+        cleaners.executeJob(cleaner1);
 
+        cleaners.removePerson(cleaner1);
 
+        // trying to remove a un registered person
+        cleaners.removePerson(johnDoe);
     }
 }
