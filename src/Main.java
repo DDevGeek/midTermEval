@@ -101,6 +101,7 @@ class SchoolTeachers extends SchoolWorker {
         System.out.println("========= SCHOOL TEACHERS 🧑‍🏫========");
         System.out.println();
         for (Person teacher : schoolTeacherList) {
+            System.out.println("ID: " + teacher.getID());
             System.out.println("Name: " + teacher.getName());
             System.out.println("Age: " + teacher.getAge());
             System.out.println("Phone number: " + teacher.getPhoneNumber());
@@ -119,7 +120,7 @@ class SchoolTeachers extends SchoolWorker {
     @Override
     public void removePerson (Person person) {
         for (Person teacher : schoolTeacherList) {
-            if (teacher.getName().equals(person.getName())) {
+            if (teacher.getName().equals(person.getName()) && teacher.getID() == person.getID()) {
                 schoolTeacherList.remove(person);
                 System.out.println(person.getName() + " was removed successfully 😃");
             }else {
@@ -150,7 +151,7 @@ abstract class SchoolStudent implements SchoolPeople {
     @Override
     public void removePerson(Person person) {
         for (Person student : studentList) {
-            if (student.getName().equals(person.getName())) {
+            if (student.getName().equals(person.getName()) && student.getID() == person.getID()) {
                 studentList.remove(person);
                 System.out.println(person.getName() + " was removed successfully 😃");
             }else {
@@ -164,6 +165,7 @@ abstract class SchoolStudent implements SchoolPeople {
         System.out.println("========= STUDENTS 👩‍🎓 ========");
         System.out.println();
         for (Person student : studentList) {
+            System.out.println("ID: " + student.getID());
             System.out.println("Name: " + student.getName());
             System.out.println("Age: " + student.getAge());
             System.out.println("Phone number: " + student.getPhoneNumber());
@@ -216,6 +218,7 @@ class SchoolCleaners extends SchoolWorker {
         System.out.println("========= SCHOOL CLEANERS 🧹 ========");
         System.out.println();
         for (Person cleaner : schoolCleanersList) {
+            System.out.println("ID: " + cleaner.getID());
             System.out.println("Name: " + cleaner.getName());
             System.out.println("Age: " + cleaner.getAge());
             System.out.println("Phone number: " + cleaner.getPhoneNumber());
@@ -234,7 +237,7 @@ class SchoolCleaners extends SchoolWorker {
     @Override
     public void removePerson(Person person) {
         for (Person worker : schoolCleanersList) {
-            if (worker.getName().equals(person.getName())) {
+            if (worker.getName().equals(person.getName()) && worker.getID() == person.getID()) {
                 schoolCleanersList.remove(person);
                 System.out.println(person.getName() + " was removed successfully 😃");
             }else {
